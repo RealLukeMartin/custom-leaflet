@@ -1,0 +1,9 @@
+<?php
+
+// create block for map
+function fdcmap_block_info() {
+  $blocks['fdcmap'] = array(
+    'info' => t('Leaflet Map for Friendswood Community Page'),
+  );
+  return $blocks;
+}
