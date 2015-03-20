@@ -7,3 +7,15 @@ function fdcmap_block_info() {
   );
   return $blocks;
 }
+
+// call map in the created block
+function fdcmap_block_view($delta = '') {
+  $community_nodes = get_all_community_nodes();
+  $points = fdcmap_create_features($community_nodes);
+
+  $blocks = array();
+  $styles = fdcmap_leaflet_map_info();
+  $map = leaflet_render_map($styles['OSM Mapnik'], $points, '500px');
+  $blocks['content'] = $map;
+  return $blocks;
+}
