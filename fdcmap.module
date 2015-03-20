@@ -19,3 +19,18 @@ function fdcmap_block_view($delta = '') {
   $blocks['content'] = $map;
   return $blocks;
 }
+
+// grab all of the Community nodes
+function get_all_community_nodes() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'community')
+        ->propertyCondition('status', 1);
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $community_items_nids = array_keys($result['node']);
+    $community_items = node_load_multiple($community_items_nids);
+  }
+  return $community_items;
+}
