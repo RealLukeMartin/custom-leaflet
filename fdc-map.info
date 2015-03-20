@@ -1,0 +1,8 @@
+name = FDC Map
+description = Leaflet powered custom maps for Communities Landing page
+package = Poetic
+dependencies[] = leaflet
+core = 7.x
+
+stylesheets[all][] = fdc-map.css
+scripts[] = fdc-map.js
