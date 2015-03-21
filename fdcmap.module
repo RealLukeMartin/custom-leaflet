@@ -86,7 +86,7 @@ function fdcmap_leaflet_map_info() {
     'scrollWheelZoom'    => FALSE,
     'touchZoom'          => TRUE,
     'trackResize'        => TRUE,
-    'zoom'               => 13,
+    'zoom'               => 10,
     'zoomAnimation'      => TRUE,
     'zoomControl'        => TRUE,
   );
