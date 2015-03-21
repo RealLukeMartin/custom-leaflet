@@ -51,7 +51,7 @@ function fdcmap_create_features($nodes) {
     $amenity_type = $node->field_type['und'][0]['value'];
 
     $data['icon'] = array(
-      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/amenity-miramar.png',
+      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/commpin-master.png',
       'popupAnchor' => array('x' => 23, 'y' => 0),
     );
 
