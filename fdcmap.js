@@ -1,5 +1,5 @@
 (function ($) {
-  Drupal.behaviors.mcm = {
+  Drupal.behaviors.fdcmap = {
     attach:function (context, settings) {
 
     }
