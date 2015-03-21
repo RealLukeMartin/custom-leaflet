@@ -2,3 +2,9 @@
 	width: 20px;
 	height: 30px;
 }
+.leaflet-container .leaflet-control-attribution {
+	display: none;
+}
+.leaflet-container .leaflet-top {
+	top: 100px;
+}
