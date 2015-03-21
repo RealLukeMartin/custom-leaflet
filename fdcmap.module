@@ -36,7 +36,7 @@ function get_all_community_nodes() {
 }
 
 // create $features array
-function mcm_create_features($nodes) {
+function fdcmap_create_features($nodes) {
   geophp_load();
   $communities_arr = array();
   foreach($nodes as $node) {
@@ -51,7 +51,7 @@ function mcm_create_features($nodes) {
     $amenity_type = $node->field_type['und'][0]['value'];
 
     $data['icon'] = array(
-      'iconUrl' => '/' . drupal_get_path('module', 'mcm') . '/images/amenity-miramar.png',
+      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/amenity-miramar.png',
       'popupAnchor' => array('x' => 23, 'y' => 0),
     );
 
@@ -71,4 +71,38 @@ function mcm_create_features($nodes) {
     $communities_arr[] = $data;
   }
   return $communities_arr;
+}
+
+function fdcmap_leaflet_map_info() {
+  $settings = array(
+    'attributionControl' => TRUE,
+    'closePopupOnClick'  => TRUE,
+    'doubleClickZoom'    => TRUE,
+    'dragging'           => TRUE,
+    'fadeAnimation'      => TRUE,
+    'layerControl'       => FALSE,
+    'maxZoom'            => 19,
+    'minZoom'            =>  0,
+    'scrollWheelZoom'    => FALSE,
+    'touchZoom'          => TRUE,
+    'trackResize'        => TRUE,
+    'zoom'               => 13,
+    'zoomAnimation'      => TRUE,
+    'zoomControl'        => TRUE,
+  );
+  $map_info['OSM Mapnik'] = array(
+    'label' => 'Communities Map',
+    'description' => 'A map of Friendswood Development Company Communities',
+    'settings' => $settings,
+    'layers' => array(
+      'earth' => array(
+        'urlTemplate' => 'http://mt2.googleapis.com/vt?x={x}&y={y}&z={z}',
+        'options' => array(
+          'attribution' => 'OSM Mapnik',
+        ),
+      ),
+    ),
+  );
+
+  return $map_info;
 }
