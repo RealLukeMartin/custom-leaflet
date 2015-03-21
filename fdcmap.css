@@ -1,1 +1,4 @@
-/*fdcmap.css*/
+.leaflet-container img.leaflet-marker-icon {
+	width: 20px;
+	height: 30px;
+}
