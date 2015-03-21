@@ -4,5 +4,5 @@ package = Poetic
 dependencies[] = leaflet
 core = 7.x
 
-stylesheets[all][] = fdc-map.css
-scripts[] = fdc-map.js
+stylesheets[all][] = fdcmap.css
+scripts[] = fdcmap.js
