@@ -34,3 +34,41 @@ function get_all_community_nodes() {
   }
   return $community_items;
 }
+
+// create $features array
+function mcm_create_features($nodes) {
+  geophp_load();
+  $communities_arr = array();
+  foreach($nodes as $node) {
+    $geocoder = $node->field_geocoder;
+    $point_places = geoPHP::load($geocoder['und'][0]['geom'], 'wkt');
+    $longitude = $point_places->coords[0];
+    $latitude = $point_places->coords[1];
+
+    $data               = array();
+    $data['type']       = 'point';
+    $data['leaflet_id'] = 'communities_' . $node->nid;
+    $amenity_type = $node->field_type['und'][0]['value'];
+
+    $data['icon'] = array(
+      'iconUrl' => '/' . drupal_get_path('module', 'mcm') . '/images/amenity-miramar.png',
+      'popupAnchor' => array('x' => 23, 'y' => 0),
+    );
+
+    $thuroughfare = "<div><p>" . $node->field_address['und'][0]['thoroughfare'] . "</p></div>";
+    $city = "<p>" . $node->field_address['und'][0]['locality'] . ", ";
+    $state = $node->field_address['und'][0]['administrative_area'] . " </p>";
+    $zip = "<p>" . $node->field_address['und'][0]['postal_code'] . "</p>";
+
+    $title = "<h4>" . $node->title . "</h4>";
+    $address = $thuroughfare .  $city . $state . $zip;
+
+
+    $data['popup'] = $title . $address;
+    $data['lat'] = $latitude;
+    $data['lon'] = $longitude;
+
+    $communities_arr[] = $data;
+  }
+  return $communities_arr;
+}
