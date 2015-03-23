@@ -48,10 +48,10 @@ function fdcmap_create_features($nodes) {
     $data               = array();
     $data['type']       = 'point';
     $data['leaflet_id'] = 'communities_' . $node->nid;
-    //$community_type = $node->field_type['und'][0]['value'];
+    $community_type = $node->field_type['und'][0]['value'];
 
     $data['icon'] = array(
-      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/commpin-master.png',
+      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/commpin-' . $community_type . '.png',
       'popupAnchor' => array('x' => 23, 'y' => 0),
     );
 
