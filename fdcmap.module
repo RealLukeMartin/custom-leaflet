@@ -25,6 +25,10 @@ function get_all_community_nodes() {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'community')
+        ->fieldCondition('field_geocoder', 'geom', 'NULL', '!=')
+        ->fieldCondition('field_logo', 'fid', 'NULL', '!=')
+        ->fieldCondition('field_map_pin', 'fid', 'NULL', '!=')
+        ->fieldCondition('field_community_type', 'value', 1, '=')
         ->propertyCondition('status', 1);
   $result = $query->execute();
 
@@ -44,14 +48,14 @@ function fdcmap_create_features($nodes) {
     $point_places = geoPHP::load($geocoder['und'][0]['geom'], 'wkt');
     $longitude = $point_places->coords[0];
     $latitude = $point_places->coords[1];
-
     $data               = array();
     $data['type']       = 'point';
     $data['leaflet_id'] = 'communities_' . $node->nid;
-    $community_type = $node->field_type['und'][0]['value'];
+    $node_url = drupal_get_path_alias('node/' . $node->nid);
 
     $data['icon'] = array(
-      'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/commpin-' . $community_type . '.png',
+      // 'iconUrl' => '/' . drupal_get_path('module', 'fdcmap') . '/images/commpin-master.png',
+      'iconUrl' =>  file_create_url($node->field_map_pin['und'][0]['uri']),
       'popupAnchor' => array('x' => 23, 'y' => 0),
     );
 
@@ -61,10 +65,13 @@ function fdcmap_create_features($nodes) {
     $zip = "<p>" . $node->field_address['und'][0]['postal_code'] . "</p>";
 
     $title = "<h4>" . $node->title . "</h4>";
+
+    $logo = "<img src= '" . file_create_url($node->field_logo['und'][0]['uri']) . "' />";
     $address = $thuroughfare .  $city . $state . $zip;
+    $viewCommunity = "<a href='/{$node_url}'> View Community »</a>";
 
 
-    $data['popup'] = $title . $address;
+    $data['popup'] = $logo . $viewCommunity;
     $data['lat'] = $latitude;
     $data['lon'] = $longitude;
 
@@ -86,7 +93,7 @@ function fdcmap_leaflet_map_info() {
     'scrollWheelZoom'    => FALSE,
     'touchZoom'          => TRUE,
     'trackResize'        => TRUE,
-    'zoom'               => 10,
+    'zoom'               => 9,
     'zoomAnimation'      => TRUE,
     'zoomControl'        => TRUE,
   );
