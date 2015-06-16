@@ -1,5 +1,5 @@
 (function ($) {
-  Drupal.behaviors.fdcmap = {
+  Drupal.behaviors.cclmap = {
     attach:function (context, settings) {
 
     }

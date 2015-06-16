@@ -1,0 +1,8 @@
+name = CCL Map
+description = Leaflet powered custom maps for amenities Landing page
+package = Poetic
+dependencies[] = leaflet
+core = 7.x
+
+stylesheets[all][] = cclmap.css
+scripts[] = cclmap.js
